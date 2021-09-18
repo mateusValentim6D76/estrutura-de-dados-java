@@ -2,6 +2,7 @@ package aula1_No;
 
 public class No <T> {
 
+	//Utilizando Generics
 	private T conteudo;
 	private No proximoNo;
 
@@ -20,6 +21,10 @@ public class No <T> {
 
 	public No getProximoNo() {
 		return proximoNo;
+	}
+	
+	public void setProximoNo(No<T> proximoNo) {
+		this.proximoNo = proximoNo;
 	}
 
 	@Override
