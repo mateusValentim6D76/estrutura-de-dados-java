@@ -1,47 +1,51 @@
 package aula3_Fila;
 
-public class Fila {
+public class Fila<T> {
 
-	private No refNoEntradaFila;
+	private No<T> refNoEntradaFila;
 
 	public Fila() {
 		this.refNoEntradaFila = null;
 	}
 
 	// Enfileira atrás do ultimo nó
-	public void enqueue(No novoNo) {
+	public void enqueue(T obj) {
+		No<T> novoNo = new No(obj);
 		novoNo.setRefNo(refNoEntradaFila);
+		refNoEntradaFila = novoNo;
 	}
 
-	public No first() {
+	public T first() {
 		if (!this.isEmpty()) {
 			No primeiroNo = refNoEntradaFila;
 			while (true) {
-				if (primeiroNo.getRefNo() != null) {
-					primeiroNo.getRefNo();
+				if (primeiroNo.getRefProximoNo() != null) {
+					primeiroNo = primeiroNo.getRefProximoNo();
 				} else {
 					break;
 				}
 			}
+			return (T) primeiroNo.getObject();
+
 		}
 		return null;
 	}
-	
-	//Retira o primeiro No da fila
-	public No dequeue() {
+
+	// Retira o primeiro No da fila e me retorna ele
+	public T dequeue() {
 		if (!this.isEmpty()) {
 			No primeiroNo = refNoEntradaFila;
 			No noAuxiliar = refNoEntradaFila;
 			while (true) {
-				if (primeiroNo.getRefNo() != null) {
+				if (primeiroNo.getRefProximoNo() != null) {
 					noAuxiliar = primeiroNo;
-					primeiroNo.getRefNo();
+					primeiroNo.getRefProximoNo();
 				} else {
 					noAuxiliar.setRefNo(null);
 					break;
 				}
 			}
-			return primeiroNo;
+			return (T) primeiroNo.getObject();
 		}
 		return null;
 	}
@@ -49,22 +53,23 @@ public class Fila {
 	public boolean isEmpty() {
 		return refNoEntradaFila == null ? true : false;
 	}
-	
+
 	@Override
 	public String toString() {
 		String stringRetorno = "";
 		No noAuxiliar = refNoEntradaFila;
-		if(refNoEntradaFila != null) {
-			while(true) {
+
+		if (refNoEntradaFila != null) {
+			while (true) {
 				stringRetorno += "[No{objeto=" + noAuxiliar.getObject() + "}]---->";
-				if(noAuxiliar.getRefNo() != null) {
-					noAuxiliar = noAuxiliar.getRefNo();
-				}else {
+				if (noAuxiliar.getRefProximoNo() != null) {
+					noAuxiliar = noAuxiliar.getRefProximoNo();
+				} else {
 					stringRetorno += "null";
 					break;
 				}
 			}
-		}else {
+		} else {
 			stringRetorno = "null";
 		}
 		return stringRetorno;
