@@ -7,7 +7,21 @@ public class ListaEncadeada<T> {
 	public ListaEncadeada(){
 		this.refEntrada = null;
 	}
-	
+
+	public void add(T conteudo){
+		No<T> novoNo = new No<>(conteudo);
+		if(this.isEmpty()){
+			refEntrada = novoNo;
+			return;
+		}
+		No<T> noAuxiliar = refEntrada;
+		for (int i = 0; i < this.size()-1; i++){
+			noAuxiliar = noAuxiliar.getProximoNo();
+		}
+		noAuxiliar.setProximoNo(novoNo);
+	}
+
+
 	public int size() {
 		int tamanhoLista = 0;
 		No<T> referenciaAux = refEntrada;
@@ -17,7 +31,7 @@ public class ListaEncadeada<T> {
 				tamanhoLista++;
 				//Caso o primeiro No da lista tenha um No afrente dele
 				if(referenciaAux.getProximoNo() != null) {
-					//Navegar até o proximo No
+					//Navegar atï¿½ o proximo No
 					referenciaAux = referenciaAux.getProximoNo();
 				}else {
 					break;
@@ -30,6 +44,7 @@ public class ListaEncadeada<T> {
 	} 
 	
 	public boolean isEmpty() {
+
 		return refEntrada == null ? true : false;
 	}
 }
