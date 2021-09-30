@@ -79,7 +79,18 @@ public class ListaEncadeada<T> {
 	}
 
 	public boolean isEmpty() {
-
 		return refEntrada == null ? true : false;
+	}
+
+	@Override
+	public String toString() {
+		String strRetorno = "";
+		No<T> noAuxiliar = refEntrada;
+		for (int i = 0; i < this.size(); i++){
+			strRetorno += "[No{conteudo=" + noAuxiliar.getConteudo() +"}]--->";
+			noAuxiliar = noAuxiliar.getProximoNo();
+		}
+		strRetorno += "null";
+		return strRetorno;
 	}
 }
