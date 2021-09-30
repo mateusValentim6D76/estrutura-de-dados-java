@@ -1,5 +1,7 @@
 package aula4_ListaEncadeada;
 
+import java.lang.IndexOutOfBoundsException;
+
 public class ListaEncadeada<T> {
 
 	No<T> refEntrada;
@@ -20,7 +22,23 @@ public class ListaEncadeada<T> {
 		}
 		noAuxiliar.setProximoNo(novoNo);
 	}
+	private No<T> getNo(int index){
+		validaIndice(index);
+		No<T> noAuxiliar = refEntrada;
+		No<T> noRetorno = null;
+		for (int i = 0; i < this.size()-1; i++){
+			noRetorno = noAuxiliar;
+			noAuxiliar = noAuxiliar.getProximoNo();
+		}
+		return noRetorno;
+	}
 
+	private void validaIndice(int index) {
+		if (index >= size()) {
+			int ultimoIndice = size() -1;
+			throw new IndexOutOfBoundsException("Não existe conteúdo no indice"+index+" desta lista. Essa lista só vai até o indice"+ultimoIndice+".");
+		}
+	}
 
 	public int size() {
 		int tamanhoLista = 0;
@@ -41,8 +59,8 @@ public class ListaEncadeada<T> {
 			}
 		} 
 		return tamanhoLista;
-	} 
-	
+	}
+
 	public boolean isEmpty() {
 
 		return refEntrada == null ? true : false;
