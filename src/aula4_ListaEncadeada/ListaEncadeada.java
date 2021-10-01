@@ -43,7 +43,7 @@ public class ListaEncadeada<T> {
 		validaIndice(index);
 		No<T> noAuxiliar = refEntrada;
 		No<T> noRetorno = null;
-		for (int i = 0; i < this.size()-1; i++){
+		for (int i = 0; i <= index; i++){
 			noRetorno = noAuxiliar;
 			noAuxiliar = noAuxiliar.getProximoNo();
 		}
