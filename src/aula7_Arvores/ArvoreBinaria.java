@@ -88,16 +88,27 @@ public class ArvoreBinaria<T extends Comparable<T>> {
 
                     for (temp = atual, filho = atual.getNoEsq(); filho.getNoDir() != null;
                          temp = filho, filho = filho.getNoEsq()
-                    ){
-                        if(filho != atual.getNoEsq()){
-                        temp.setNoDir(filho.getNoEsq());
-                        filho.setNoEsq(raiz.getNoEsq());
+                    ) {
+                        if (filho != atual.getNoEsq()) {
+                            temp.setNoDir(filho.getNoEsq());
+                            filho.setNoEsq(raiz.getNoEsq());
+                        }
                     }
-                }
                     filho.setNoDir(raiz.getNoDir());
                     raiz = filho;
+                }
+                //Correndo dentro da arvore
+
+                // Caso a referencia do Nó atual a direita for nula
             } else if (atual.getNoDir() == null) {
 
+                if (pai.getNoEsq() == atual){
+                    pai.setNoEsq(atual.getNoEsq());
+                } else{
+                    pai.setNoDir(atual.getNoEsq());
+                }
+
+                // Caso a referencia do Nó atual a esquerda for nula
             } else if (atual.getNoEsq() == null) {
 
             } else {
