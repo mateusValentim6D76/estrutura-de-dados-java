@@ -65,18 +65,45 @@ public class ArvoreBinaria<T extends Comparable<T>> {
             BinNo<T> filho = null;
             BinNo<T> temp = null;
 
-            while (atual != null && !atual.getConteudo().equals(conteudo)){
+            while (atual != null && !atual.getConteudo().equals(conteudo)) {
                 pai = atual;
-                if (conteudo.compareTo(atual.getConteudo()) < 0){
+                if (conteudo.compareTo(atual.getConteudo()) < 0) {
                     atual = atual.getNoEsq();
-                } else{
+                } else {
                     atual = atual.getNoDir();
                 }
             }
 
-            if(atual == null){
+            if (atual == null) {
                 System.out.println("Conteudo não encontrado. Bloco Try");
             }
+
+            if (pai == null) {
+                if (atual.getNoDir() == null) {
+                    this.raiz = atual.getNoEsq();
+                } else if (atual.getNoEsq() == null) {
+                    this.raiz = atual.getNoDir();
+                } else {
+                    //Tratando dos nós descendentes dos Nó que estamos retirando.
+
+                    for (temp = atual, filho = atual.getNoEsq(); filho.getNoDir() != null;
+                         temp = filho, filho = filho.getNoEsq()
+                    ){
+                        if(filho != atual.getNoEsq()){
+                        temp.setNoDir(filho.getNoEsq());
+                        filho.setNoEsq(raiz.getNoEsq());
+                    }
+                }
+                    filho.setNoDir(raiz.getNoDir());
+                    raiz = filho;
+            } else if (atual.getNoDir() == null) {
+
+            } else if (atual.getNoEsq() == null) {
+
+            } else {
+
+            }
+
         } catch (NullPointerException erro) {
             System.out.println("Conteudo não encontrado. Bloco Catch");
         }
